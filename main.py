@@ -1,6 +1,22 @@
 def longest_career(albums):
   # Write your solution here!
-  pass
+  alb_dict = {}
+  diff = 0
+
+  for row in albums:
+    if row[0] not in alb_dict:
+      alb_dict[row[0]] = [row[2]]
+    else:
+      alb_dict[row[0]].append(row[2])
+  
+  for k, v in alb_dict.items():
+    temp_diff = max(v) - min(v)
+    diff = max(temp_diff, diff)
+    if diff == temp_diff:
+      longevity_aut = k
+  
+  return((longevity_aut, diff))
+      
 
 
 # Test cases
