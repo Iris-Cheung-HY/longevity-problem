@@ -1,21 +1,36 @@
 def longest_career(albums):
   # Write your solution here!
   alb_dict = {}
-  diff = 0
+  max_year_count = 0
+  max_artist = ""
 
+  # for row in albums:
+  #   if row[0] not in alb_dict:
+  #     alb_dict[row[0]] = [row[2]]
+  #   else:
+  #     alb_dict[row[0]] += [row[2]]
+    
   for row in albums:
-    if row[0] not in alb_dict:
-      alb_dict[row[0]] = [row[2]]
+    art = row[0]
+    year = row[2]
+    if art not in alb_dict:
+      alb_dict[art] = [year, year]
     else:
-      alb_dict[row[0]].append(row[2])
+      item = alb_dict[art]
+      alb_dict[art] = [min(item[0], year), max(item[1], year)]
   
-  for k, v in alb_dict.items():
-    temp_diff = max(v) - min(v)
-    diff = max(temp_diff, diff)
-    if diff == temp_diff:
-      longevity_aut = k
-  
-  return((longevity_aut, diff))
+  for key, values in alb_dict.items():
+    diff = values[1] - values[0]
+
+    if diff > max_year_count:
+      max_year_count = diff
+      max_artist = key
+
+  return max_artist, max_year_count
+
+
+
+
       
 
 
